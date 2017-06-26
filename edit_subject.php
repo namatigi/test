@@ -45,7 +45,7 @@ if(isset($_GET['subj'])){
         }
 
         if(empty($errors)){
-            $id=mysql_prep($_GET['subj']);
+            $idgit =mysql_prep($_GET['subj']);
             $menu_name = mysql_prep($_POST['menu_name']);
             $position = mysql_prep($_POST['position']);
             $visible = mysql_prep($_POST['visible']);
@@ -160,6 +160,7 @@ if(isset($_GET['subj'])){
             </form>
 
             <br/>
+            <a href="new_page.php">+Add Page</a>&nbsp;&nbsp;
 
             <a href="content.php">Cancel</a>
 

@@ -78,9 +78,16 @@
             <h2>Select a subject or page to edit</h2>
             <?php } ?>
 
+
+            <br/><br>
+
+            <a href="content.php?page=<?php echo urlencode($sel_pages["id"])?>">Edit Page</a>
+
         </td>
     </tr>
 </table>
+
+<
 
 
 
