@@ -27,7 +27,7 @@
             <h2>Select a subject or page to edit</h2>
             <?php } ?>
             <br/><br>
-            <a href="content.php?page=<?php echo urlencode($sel_page["id"])?>">Edit Page</a>
+            <a href="edit_page.php?page=<?php echo$sel_page["id"]?>">Edit Page</a>
         </td>
 
     </tr>

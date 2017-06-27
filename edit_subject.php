@@ -102,7 +102,7 @@
             </form>
 
             <br/>
-            <a href="new_page.php">+Add Page</a>&nbsp;&nbsp;
+            <a href="new_page.php?subj=<?php echo $sel_subject['id'];?>"> +Add a new page to this subject</a>&nbsp;&nbsp;
 
             <a href="content.php">Cancel</a>
 
