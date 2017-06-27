@@ -14,7 +14,7 @@
                 $page_count = mysqli_num_rows($page_set) + 1;
             }else{
                 $page_set = get_pages_for_subject($sel_subject_id['id']);
-                $page_count=mysqli_num_rows($page_set)+1;
+                $page_count=mysqli_num_rows($page_set) + 1;
             }
 
             for($count=1;$count<=$page_count;$count++){

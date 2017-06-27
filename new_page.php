@@ -16,8 +16,8 @@
 
         <?php if(!empty($errors)){display_errors($errors);} ?>
 
-        <form action="new_page.php?subj=<?php ?>" method="post">
-            <?php $new_page =true; ?>
+        <form action="new_page.php?subj=<?php echo $sel_subject['id']; ?>" method="post">
+            <?php $new_page = true; ?>
             <?php include "page_form.php" ?>
 
             <input type="submit" name="submit" value=""Create Page" />
