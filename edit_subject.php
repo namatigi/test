@@ -1,26 +1,7 @@
 <?php include("includes/connection.php");?>
 <?php include("includes/header.php"); ?>
-
 <?php require_once("includes/functions.php");?>
-<?php
-if(isset($_GET['subj'])){
-    $sel_subj =$_GET['subj'];
-    $sel_subject= get_subject_by_id($sel_subj);
-    $sel_pages=NULL;
-    $sel_pg=0;
-}elseif(isset($_GET['page'])){
-    $sel_subj=0;
-    $sel_subject=NULL;
-    $sel_pages = $_GET['page'];
-    $sel_pages = get_page_by_id($sel_pages);
-}else{
-    $sel_pages=NULL;
-    $sel_subject=NULL;
-    $sel_pg=0;
-    $sel_subj=0;
-}
-
-?>
+<?php find_selected_page();?>
 
 <?php
     if(intval($_GET['subj'])==0){
@@ -32,7 +13,7 @@ if(isset($_GET['subj'])){
 
         $required_fields = array('menu_name','position','visible');
         foreach($required_fields as $fieldname){
-            if(!isset($_POST[$fieldname])||empty($_POST[$fieldname])){
+            if(!isset($_POST[$fieldname])||empty($_POST[$fieldname]) && $_POST[$fieldname]!=0){
                 $errors[]=$fieldname;
             }
         }
@@ -45,7 +26,7 @@ if(isset($_GET['subj'])){
         }
 
         if(empty($errors)){
-            $idgit =mysql_prep($_GET['subj']);
+            $id =mysql_prep($_GET['subj']);
             $menu_name = mysql_prep($_POST['menu_name']);
             $position = mysql_prep($_POST['position']);
             $visible = mysql_prep($_POST['visible']);
@@ -73,46 +54,7 @@ if(isset($_GET['subj'])){
 <table id="structure">
     <tr>
         <td id="navigation">
-            <ul class="subjects">
-                <?php
-
-                #subject database query
-                $subject_set=get_all_subjects();
-
-                #use returned subjects
-                while($subject=mysqli_fetch_array($subject_set)) {
-                    echo "<li ";
-                    if($subject["id"]==$sel_subj) {
-                        echo "class=\"selected\"";
-                    }
-                    echo "><a href=\"edit_subject.php?subj=" .urlencode($subject["id"])."\">
-                 {$subject['menu_name']}
-                </a></li>";
-
-                    #pages database query.
-                    $page_set=get_pages_for_subject($subject["id"]);
-
-                    #use returned pages
-                    echo "<ul class=\"pages\">";
-                    while ($page = mysqli_fetch_array($page_set)) {
-                        echo "<li ";
-                        if($page["id"]==$sel_pages ) {
-                            echo "class=\"selected\"";
-                        }
-                        echo "><a href=\"content.php?page=" .urlencode($page["id"])."\">
-                    {$page['menu_name']}
-                    </a></li>";
-                    }
-
-                    echo "</ul>";
-
-                }
-
-                ?>
-            </ul>
-
-
-
+            <?php echo navigation($sel_subject,$sel_page); ?>
         </td>
         <td id="page">
 
